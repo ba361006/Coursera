@@ -2,7 +2,7 @@
 
 - Huffman coding
 
-    ![Huffman coding](Huffman_coding.jpg)
+    ![](Huffman_coding.jpg)
 
     snipped from coursera
 
