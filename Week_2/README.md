@@ -84,6 +84,8 @@ Now, we can just put all the things back to the formula, and its concept is exac
 <br>
 
 ## Quantization
+
+
 why are we doing quantization? We are doing quantization because we are going to do Huffman coding after that. And remember, in Huffman coding, we want a non-uniform distribution. We want some coefficients to appear a lot, so we're going to give a short code, and some coefficients to appear not much, so we can give them a long code. for example, if we quantize a load, we might find out that 7, 8, 9, 10 all become 0. And then we're going to be able to basically compress a lot
 
 <br>
