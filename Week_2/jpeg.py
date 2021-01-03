@@ -63,8 +63,11 @@ class jpeg():
     
     def __quantize(self):
         self.__quantization = []
-        result = cv2.divide(self.__dct[0][0], self.__JPEG_TABLE)        
-        
+        result = cv2.divide(self.__dct[0][0], self.__JPEG_TABLE)
+        # print("Result: ", result)
+        # result = round(result)
+        # print("Result: ", result)
+        print(np.round(1.1))
 
 
         
@@ -73,7 +76,7 @@ class jpeg():
 
 if __name__ == "__main__":
     image_in = cv2.imread("./image/lena.png")
-    jpeg(image_in)
-    # cv2.imshow("image_in", image_in)
-    # cv2.waitKey()
+    # jpeg(image_in)
+    cv2.imshow("image_in", image_in)
+    cv2.waitKey()
 

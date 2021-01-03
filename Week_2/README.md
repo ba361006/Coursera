@@ -11,9 +11,9 @@ In week 2, we are going to learn image compression by JPEG, which is probably th
 </div>
 
 ## Construct n x n subimages
-In this stage, we are going to cut the image into several blocks, and each one of these blocks has n x n pixels. You can chose what's the value of N, but basically jpeg uses 8 x 8 block. It's easy for a greyscale image because you only have one channel, but for colour image, which has 3 channels of RGB, we just do the same thing to each of them. 
+In this stage, we are going to cut the image into several blocks, and each one of these blocks has n x n pixels. You can chose what's the value of N, but basically JPEG uses 8 x 8 block. It's easy for a greyscale image because you only have one channel, but for colour image, which has 3 channels of RGB, we just do the same thing to each of them. 
 
-But normally, there are a lot of coorelation between the channels, so jpeg, instead of calling RGB, goes to another dimention called Y, Cb, CR. It is an easy transform, and you can easily get information on the internet but here we just focus on jpeg. Now we've got an image in Y, Cb, CR domain, and the next step will be doing a Forward transform called Discrete Cosine Transform(DCT).
+But normally, there are a lot of coorelation between the channels, so JPEG, instead of calling RGB, goes to another dimention called Y, Cb, CR. It is an easy transform, and you can easily get information on the internet but here we just focus on JPEG. Now we've got an image in Y, Cb, Cr domain, and the next step will be doing a Forward transform called Discrete Cosine Transform(DCT).
 
 <br>
 
@@ -73,24 +73,18 @@ Until now we already know the underlying significance of cosine function is basi
 (Formula 3)
 </div>
 
-When the value of i equals to one, we will get an original image. When the value of i comes to 1, we use the first 4 pixels minus the last 4, so if we get a great number from the Formula 3 it means that the grey value within this region changes significantly, and we may can consider this region as an image with noise or edges. In contrast, if we get a low number from the Formula 3, it means that this region is basically a smooth, constant part of the picture.
 
-So, what about we get a large value from the Formula 3 when the value of i is quite high? Let's pay attention on the last table in Picture 2. Signs of adjacent outcomes change superfast(or you can say the frequency is high), which means comparing with i=1, if we still get a great value from the Formula 3, the possibility of getting edges or noise in this region is much higher(because most of the grey value of edges or noise change significantly even in a small region or adjacent pixels). And maybe that's the reason why people consider high frequency region as the place that edges and noise existing.
+When the value of i equals to zero, we will get an original image. When the value of i comes to 1, we use the first 4 pixels minus the last 4, so if we get a great number from Formula 3 it means that the grey value within this region changes significantly, and we may can consider this region as an image with noise or edges. In contrast, if we get a low number from Formula 3, it means that this region is basically a smooth, constant part of the picture.
+
+So, what about we get a large value from Formula 3 when the value of i is quite high? Let's pay attention on the last table in Picture 2. Signs of adjacent outcomes change superfast(or you can say the frequency is high), which means comparing with i=1, if we still get a great value from Formula 3, the possibility of getting edges or noise in this region is much higher(because most of the grey value of edges or noise change significantly even in a small region or adjacent pixels). And maybe, for my personal understanding, that's the reason why people consider high frequency region as the place that edges and noise exist.
 
 Combining all the things above together, we can make a conclusion of that if an array in x-domain(spacial domain) is an approximately constant background, we will only get a relatively higher value in the beginning of i-domain(frequency domain) array and rest of the value in this i-domain array should be low. On the other hand, we will have a large number in i-domain if the x-domain array has a high variation, where the edges or noise may exist.
 
-Now, we can just put all the things back to the formula, and its concept is exactly the same with the easier version, because most of them are constant or close to constant. Firtly, We just take the grey value from special domain. Secondly, use cosine function to weigh and reverse it. Finally, multiply them with some coefficents to get the result. The value situated in the upper-left corner called DC value should have a relatively higher value to the others due to the formula. As the coordination move from the upper-left corner to the lower-right corner, the value in the position should be getting lower and lower, until 0. 
+Now, we can just put all the things back to Formula 1, and its concept is exactly the same with the easier version, because most of them are constant or close to constant. Firtly, We just take the grey value from spacial domain. Secondly, use cosine function to weigh and reverse it. Finally, multiply them with some coefficents to get the result. The value situated in the upper-left corner called DC value should have a relatively higher value to the others. As the coordination move from the upper-left corner to the lower-right corner, the value in the position should be getting lower and lower, until 0. 
 
 <br>
 
-## Quantization
-
-
-why are we doing quantization? We are doing quantization because we are going to do Huffman coding after that. And remember, in Huffman coding, we want a non-uniform distribution. We want some coefficients to appear a lot, so we're going to give a short code, and some coefficients to appear not much, so we can give them a long code. for example, if we quantize a load, we might find out that 7, 8, 9, 10 all become 0. And then we're going to be able to basically compress a lot
-
-<br>
-
-## Huffman coding
+## Huffman Coding
 
 This is a sort of prefix-free code which will simplify the process of reconstructuring the original signal and save the memory with a very simple conputation. 
 ![Huffman_intro](./Image/Huffman_coding_1.JPG)
@@ -104,4 +98,71 @@ This is a sort of prefix-free code which will simplify the process of reconstruc
 For example, look at the column Code, and you might notice that there is always a digit that is different from the other digits in every column. When the decoder receives the first digit which is one, then the decoder should know that its no need to wait for another digit to identify which symbol it is. 
 
 Otherwise, in the same context, if the first digit that decoder receives is zero, then it should wait for another digit to determine whether it should stop waiting or not. And so on, until we are able to indentify every symbol in the list.
+
+<br>
+
+## Quantization
+So far, we already know after doing DCT we will get an matrix or an image whose grey value normally decreases from upper-left to lower-right. Then, we can do the quantization which allows us to compress a lot. Also, in this step, we try to make a non-uniform distribution so that we will have a better result from doing the Huffman Coding. Let's take 8x8 block as an exmaple, and have a look at the image below.
+
+<div align="center">
+
+![quantization_table](./image/quantization_table.png)
+
+(Picture 3)
+</div>
+
+There are many ways we can do the quantization. For example, we can only take some coefficients and remove others like what picture a in Picture 3 does, or we can specify which coefficient we are going to take just like picture c in Picture 3. 
+In these methods, we can specify which exactly the pixels we want to send, but the disadvantage of this method is that we still need to send 8 bits to represent a pixel.
+
+Now, what JPEG says something very smart, for the picture b in Picture 3. For indexing, the first outcome from Formula 3, which is D0, we put it on the upper-left corner, and put the second outcome D1 right next to D0 in horizontal direction. Then we do a zigzag fashion until it reaches to the lower-right corner just like the number which is exactlly the index of outcome from Formula 3 in picture d. 
+
+For the quantization, we are going to take some pixels and represent it with 8 bits and another with 7 bits and so on, until reaching the lower-right corner. It allows us to compress a lot but still can do a reasonable job just by quantizing the pixels that we are more interested in with 256 degrees and using only one or two numbers to represent the less important pixels.
+
+The benefit of using these methods are that we already know the grey value will decrease as the increase in index number. So when JPEG arrives to a certain coefficient, and sees that everybody else that comes after becomes 0, it just puts one signal that says end. We can know that every following pixel should be zero, then we are able to save a lot of bits.
+
+So that's the basic idea of quantization, before seeing how the JPEG does the quantization maybe here is a good place to take a break.
+
+<br>
+
+> During the break, you may can think a question that why we pay more interest in the upper-left instead of others during the quantization. For my personal understanding of this question is situated at the bottom of this artical, after thinking you may can have a look at it.
+
+<br>
+
+<div align="center">
+
+![threshold_coding](./image/threshold_coding.png)
+(Picture 4)
+</div>
+
+For doing the quantization, we are going to round every outcome from Formula 3 down to its closest number based on the specific coefficients cooresponding to a typical normalization matrix situated on the picture b in Picture 4. Let's take D(0,0) as an example.
+
+<div align="center">
+
+![quantization_formula](./image/quantization_formula_1.png)
+
+(Formula 4)
+
+</div>
+
+Once we have done the rounding part, the value between 0~15 will become 0, and the value between 16~31 will become 1 and so on. You may notice that the number at the upper-left corner is quite lower than the number located at the lower-right, which is also the same question you thought during the break time.
+
+This part is crucial to Huffman Coding, because when doing Huffman Coding, we are expecting it has an non-uniform distribution so that we can compress a lot. By doing the quantization, we are basically increasing the posibility of some numbers from appearing or making it more concentrated.
+
+After doing the quantization, the matrix is ready to encode by Huffman Coding, and send it out. 
+
+For receivers, they will do exactlly opposite way of what we just did. Let's just take D(0,0) as an example again, and have a look at Formula 5. 
+
+
+<div align="center">
+
+![quantization_formula](./image/quantization_formula_2.png)
+
+(Formula 5)
+</div>
+
+Once receivers get the signal, what receivers do is multiplying it by the specific number cooresponding to the normalization matrix, and they will get the result that is approximately the same with the original one. 
+
+
+<br>
+
 

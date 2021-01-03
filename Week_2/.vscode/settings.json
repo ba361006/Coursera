@@ -1,0 +1,12 @@
+{
+    "python.pythonPath": "D:\\Coding\\Python\\python.exe",
+    // Ignore the red line under cv2. This problem is due to cv2 can't be recognized by pylint,so to solve this probelm, we add cv2 to whitelist.
+    "python.linting.pylintArgs": [
+        "--extension--pkg-whitelist=cv2"
+    ],
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "terminal.integrated.shell.windows": "C:/Windows/system32/cmd.exe",
+    "git.ignoreLimitWarning": true,
+    // "terminal.integrated.windowsEnableConpty": false
+}
