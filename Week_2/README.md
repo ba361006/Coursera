@@ -86,18 +86,56 @@ Now, we can just put all the things back to Formula 1, and its concept is exactl
 
 ## Huffman Coding
 
-This is a sort of prefix-free code which will simplify the process of reconstructuring the original signal and save the memory with a very simple conputation. 
-![Huffman_intro](./Image/Huffman_coding_1.JPG)
-<div align="center"> (Picture 1) </div>
+This is a sort of prefix-free code which will simplify the process of reconstructuring the original signal and save the memory with a very simple conputation. Now, let's start with how well can Huffman Coding compresss and then we will se how do we do Huffman Coding.
+
+<div align="center"> 
+
+![Huffman_intro](./Image/Huffman_coding_0.png)
+
+(Picture 3) </div>
+
+- rk : grey value  
+- pr(rk) : posibility of rk  
+- Code 1 : 8 bits binary representation  
+- l1(rk) : number of bits that binary representation uses
+- Code 2 : binary representation after doing Huffman Coding
+- l2(rk) : number of bits that Huffman Coding uses
+
+
+Let's take a glance at Picture 3. You can see the power of Huffman Coding just by comparing the number between l1 and l2, which are length of the Code that the methods use. Note that the higher the probability of occurance of an symbol, the shorter the length of the symbol after doing Huffman Coing, which is quite an important property of Huffman Coding.
 
 <br>
 
-![Huffman_practise](./Image/Huffman_coding_1.JPG)
-<div align="center"> (Picture 2) </div>
 
-For example, look at the column Code, and you might notice that there is always a digit that is different from the other digits in every column. When the decoder receives the first digit which is one, then the decoder should know that its no need to wait for another digit to identify which symbol it is. 
+<div align="center">
 
-Otherwise, in the same context, if the first digit that decoder receives is zero, then it should wait for another digit to determine whether it should stop waiting or not. And so on, until we are able to indentify every symbol in the list.
+![Huffman_practise](./Image/Huffman_coding_1.png)
+
+(Picture 4) 
+</div>
+
+
+
+<div align="center">
+
+![Huffman_practise](./Image/Huffman_coding_2.JPG)
+
+(Picture 5) 
+</div>
+
+The way doing Huffman Coding is illustrated as Picture 4 & 5, which are ordering and encoding respectively. 
+
+Firstly, like the first two columns from the left, write down the symbol and its probability in the order of the symbol's probability. 
+
+Secondly, combine the last two elements into one in the Probability column and rearrange the column in numerical order until there are only two numbers left. 
+
+Thirdly, let's start from the right to the left, give a 0 to the higer number, a 1 to the lower number. 
+
+Finally, undo the thing we just did in second step, and also give a 0 and a 1 until the number of elements in the Probability column is the same with the Symbol column's. For example, 0.6 comes from the combination of two 0.3, so we just separate 0.6 into two 0.3 and give it a 0 and a 1 just like what Picture 3 does.
+
+Now, we get the Huffman Code like the Code column. You might notice that there always has one different character from others in a column, and that's the key when decoding Huffman Coding. For receivers, when they get the first digit which is one for the first digit in this example, then receivers should know that its no need to wait for another digit to identify which symbol it is. 
+
+While if the first digit that decoders receives zero, then they should wait for another digit to determine whether it should stop waiting or not until it is able to indentify every symbol in the list.
 
 <br>
 
@@ -161,8 +199,3 @@ For receivers, they will do exactlly opposite way of what we just did. Let's jus
 </div>
 
 Once receivers get the signal, what receivers do is multiplying it by the specific number cooresponding to the normalization matrix, and they will get the result that is approximately the same with the original one. 
-
-
-<br>
-
-
