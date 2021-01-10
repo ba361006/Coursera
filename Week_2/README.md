@@ -6,7 +6,7 @@ In week 2, we are going to learn image compression by JPEG, which is probably th
 
 <div align="center"> 
 
-![JPEG_procedure](./Image/JPEG.jpg)
+![JPEG_procedure](./image/JPEG.jpg)
 (Picture 0) 
 </div>
 
@@ -90,7 +90,7 @@ This is a sort of prefix-free code which will simplify the process of reconstruc
 
 <div align="center"> 
 
-![Huffman_intro](./Image/Huffman_coding_0.png)
+![Huffman_intro](./image/Huffman_coding_0.png)
 
 (Picture 3) </div>
 
@@ -109,7 +109,7 @@ Let's take a glance at Picture 3. You can see the power of Huffman Coding just b
 
 <div align="center">
 
-![Huffman_practise](./Image/Huffman_coding_1.png)
+![Huffman_practise](./image/Huffman_coding_1.png)
 
 (Picture 4) 
 </div>
@@ -118,7 +118,7 @@ Let's take a glance at Picture 3. You can see the power of Huffman Coding just b
 
 <div align="center">
 
-![Huffman_practise](./Image/Huffman_coding_2.JPG)
+![Huffman_practise](./image/Huffman_coding_2.JPG)
 
 (Picture 5) 
 </div>
