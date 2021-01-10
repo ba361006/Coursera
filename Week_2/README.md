@@ -7,6 +7,7 @@ In week 2, we are going to learn image compression by JPEG, which is probably th
 <div align="center"> 
 
 ![JPEG_procedure](./image/JPEG.jpg)
+
 (Picture 0) 
 </div>
 
@@ -42,6 +43,7 @@ How about DCT? Does it do better than FT? Let's see the formula for DCT.
 <div align="center">
 
 We assume that we have a NxN image, and its grey value on the position (x,y) is f(x,y)
+
 ![DCT_formula](./image/dct_formula.png)
 
 (Formula 1)
@@ -182,7 +184,7 @@ For doing the quantization, we are going to round every outcome from Formula 3 d
 
 </div>
 
-Once we have done the rounding part, the value between 0~15 will become 0, and the value between 16~31 will become 1 and so on. You may notice that the number at the upper-left corner is quite lower than the number located at the lower-right, which is also the same question you thought during the break time.
+Once we have done the rounding part, the value between 0-15 will become 0, and the value between 16-31 will become 1 and so on. You may notice that the number at the upper-left corner is quite lower than the number located at the lower-right, which is also the same question you thought during the break time.
 
 This part is crucial to Huffman Coding, because when doing Huffman Coding, we are expecting it has an non-uniform distribution so that we can compress a lot. By doing the quantization, we are basically increasing the posibility of some numbers from appearing or making it more concentrated.
 
