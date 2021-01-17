@@ -142,7 +142,7 @@ While if the first digit that decoders receives zero, then they should wait for 
 <br>
 
 ## Quantization
-So far, we already know after doing DCT we will get an matrix or an image whose grey value normally decreases from upper-left to lower-right. Then, we can do the quantization which allows us to compress a lot. Also, in this step, we try to make a non-uniform distribution so that we will have a better result from doing the Huffman Coding. Let's take 8x8 block as an exmaple, and have a look at the image below.
+So far, we already know after doing DCT we will get an matrix whose grey value normally decreases from upper-left to lower-right. Then, we can do the quantization which allows us to compress a lot. Also, in this step, we try to make a non-uniform distribution so that we will have a better result from doing the Huffman Coding. Let's take 8x8 block as an exmaple, and have a look at the image below.
 
 <div align="center">
 
@@ -152,19 +152,17 @@ So far, we already know after doing DCT we will get an matrix or an image whose 
 </div>
 
 There are many ways we can do the quantization. For example, we can only take some coefficients and remove others like what picture a in Picture 3 does, or we can specify which coefficient we are going to take just like picture c in Picture 3. 
-In these methods, we can specify which exactly the pixels we want to send, but the disadvantage of this method is that we still need to send 8 bits to represent a pixel.
+In these methods, we can specify which pixels we want to send, but the disadvantage of this method is that we still need to send 8 bits to represent a pixel.
 
-Now, what JPEG says something very smart, for the picture b in Picture 3. For indexing, the first outcome from Formula 3, which is D0, we put it on the upper-left corner, and put the second outcome D1 right next to D0 in horizontal direction. Then we do a zigzag fashion until it reaches to the lower-right corner just like the number which is exactlly the index of outcome from Formula 3 in picture d. 
+Now, what JPEG says something very smart, for the picture b in Picture 3. We put D0 which is the first outcome from Formula 3 on the upper-left corner, and put the second outcome D1 right next to D0 in horizontal direction. Then we do a zigzag fashion until it reaches to the lower-right corner just like the number in picture d. 
 
-For the quantization, we are going to take some pixels and represent it with 8 bits and another with 7 bits and so on, until reaching the lower-right corner. It allows us to compress a lot but still can do a reasonable job just by quantizing the pixels that we are more interested in with 256 degrees and using only one or two numbers to represent the less important pixels.
-
-The benefit of using these methods are that we already know the grey value will decrease as the increase in index number. So when JPEG arrives to a certain coefficient, and sees that everybody else that comes after becomes 0, it just puts one signal that says end. We can know that every following pixel should be zero, then we are able to save a lot of bits.
+Next, a lot of them will become 0 after we doing a very strong quantization. The benefit of this is that we already know the grey value will decrease as the increase in the index number. So when JPEG receives to a certain coefficient, and sees that everybody else that comes after becomes 0, it just puts one signal that says end. We can know that every following pixel should be zero, then we are able to save a lot of bits.
 
 So that's the basic idea of quantization, before seeing how the JPEG does the quantization maybe here is a good place to take a break.
 
 <br>
 
-> During the break, you may can think a question that why we pay more interest in the upper-left instead of others during the quantization. For my personal understanding of this question is situated at the bottom of this artical, after thinking you may can have a look at it.
+> During the break, you may can think why we pay more interest in the upper-left instead of others during the quantization. My personal understanding of this question is situated at the bottom of this artical, and you may can have a look at it.
 
 <br>
 
@@ -201,3 +199,12 @@ For receivers, they will do exactlly opposite way of what we just did. Let's jus
 </div>
 
 Once receivers get the signal, what receivers do is multiplying it by the specific number cooresponding to the normalization matrix, and they will get the result that is approximately the same with the original one. 
+
+
+<br>
+
+## Persional Understanding
+
+For the question in Quantization, you may notice that all the coefficients from Formula 3 are positive when i (or j) is 0. It means that we are adding all the grey value from the 8x8 blocks. As the value of i or j gets higher, we get more negative coefficients(it's easy to get this result by observing the tables in Picture 2), the outcome number from the Formula 3 will be lower also.
+
+So 
