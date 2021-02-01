@@ -198,4 +198,9 @@ For receivers, they will do exactlly opposite way of what we just did. Let's jus
 (Formula 5)
 </div>
 
-Once receivers get the signal, what receivers do is multiplying it by the specific number cooresponding to the normalization matrix, and they will get the result that is approximately the same with the original one. 
+Once receivers get the signal, what receivers do is just multiplying it by the specific number cooresponding to the normalization matrix, and they will get the result that is approximately the same with the original one. 
+
+<br>
+
+## Personal Understanding
+
