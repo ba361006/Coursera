@@ -6,7 +6,7 @@ In week 2, we are going to learn image compression by JPEG, which is probably th
 
 <div align="center"> 
 
-![JPEG_procedure](./image/JPEG.jpg)
+![JPEG_procedure](./image/JPEG.JPG)
 
 (Picture 0) 
 </div>
