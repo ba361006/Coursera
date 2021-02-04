@@ -148,7 +148,7 @@ So far, we already know after doing DCT we will get an matrix whose grey value n
 
 ![quantization_table](./image/quantization_table.png)
 
-(Picture 3)
+(Picture 6)
 </div>
 
 There are many ways we can do the quantization. For example, we can only take some coefficients and remove others like what picture a in Picture 3 does, or we can specify which coefficient we are going to take just like picture c in Picture 3. 
@@ -170,7 +170,7 @@ So that's the basic idea of quantization, before seeing how the JPEG does the qu
 
 ![threshold_coding](./image/threshold_coding.png)
 
-(Picture 4)
+(Picture 7)
 </div>
 
 For doing the quantization, we are going to round every outcome from Formula 3 down to its closest number based on the specific coefficients cooresponding to a typical normalization matrix situated on the picture b in Picture 4. Let's take D(0,0) as an example.
