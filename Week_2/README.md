@@ -6,7 +6,7 @@ In week 2, we are going to learn image compression by JPEG, which is probably th
 
 <div align="center"> 
 
-![JPEG_procedure](./image/JPEG.jpg)
+![JPEG_procedure](./Week_2/image/JPEG.jpg)
 
 (Picture 0) 
 </div>
@@ -33,7 +33,7 @@ Another sensable reason is that FT has a underlying assumption of periodicity. I
 
 <div align="center"> 
 
-![why_DCT](./image/why_dct.png)
+![why_DCT](./Week_2/image/why_dct.png)
 
 (Picture 1) 
 </div>
@@ -44,7 +44,7 @@ How about DCT? Does it do better than FT? Let's see the formula for DCT.
 
 We assume that we have a NxN image, and its grey value on the position (x,y) is f(x,y)
 
-![DCT_formula](./image/dct_formula.png)
+![DCT_formula](./Week_2/image/dct_formula.png)
 
 (Formula 1)
 </div>
@@ -52,7 +52,7 @@ We assume that we have a NxN image, and its grey value on the position (x,y) is 
 Let's start with 1D array. Now, let's just focus on first cosine function and ignore other parameters and constants. The formula of the cosine function is attached below.
 <div align="center">
 
-![cosine_function](./image/cosine_function.png)
+![cosine_function](./Week_2/image/cosine_function.png)
 
 (Formula 2)
 </div>
@@ -61,7 +61,7 @@ By running cosine_value.py, we can get an result of that signs and values of the
 
 <div align="center">
 
-![cosine_value](./image/cosine_value.png)
+![cosine_value](./Week_2/image/cosine_value.png)
 
 (Picture 2)
 </div>
@@ -70,7 +70,7 @@ Until now we already know the underlying significance of cosine function is basi
 
 <div align="center">
 
-![without_y_j](./image/without_y_j.png)
+![without_y_j](./Week_2/image/without_y_j.png)
 
 (Formula 3)
 </div>
@@ -92,7 +92,7 @@ This is a sort of prefix-free code which will simplify the process of reconstruc
 
 <div align="center"> 
 
-![Huffman_intro](./image/Huffman_coding_0.png)
+![Huffman_intro](./Week_2/image/Huffman_coding_0.png)
 
 (Picture 3) </div>
 
@@ -111,7 +111,7 @@ Let's take a glance at Picture 3. You can see the power of Huffman Coding just b
 
 <div align="center">
 
-![Huffman_practise](./image/Huffman_coding_1.png)
+![Huffman_practise](./Week_2/image/Huffman_coding_1.png)
 
 (Picture 4) 
 </div>
@@ -120,7 +120,7 @@ Let's take a glance at Picture 3. You can see the power of Huffman Coding just b
 
 <div align="center">
 
-![Huffman_practise](./image/Huffman_coding_2.JPG)
+![Huffman_practise](./Week_2/image/Huffman_coding_2.JPG)
 
 (Picture 5) 
 </div>
@@ -146,7 +146,7 @@ So far, we already know after doing DCT we will get an matrix whose grey value n
 
 <div align="center">
 
-![quantization_table](./image/quantization_table.png)
+![quantization_table](./Week_2/image/quantization_table.png)
 
 (Picture 3)
 </div>
@@ -168,7 +168,7 @@ So that's the basic idea of quantization, before seeing how the JPEG does the qu
 
 <div align="center">
 
-![threshold_coding](./image/threshold_coding.png)
+![threshold_coding](./Week_2/image/threshold_coding.png)
 
 (Picture 4)
 </div>
@@ -177,7 +177,7 @@ For doing the quantization, we are going to round every outcome from Formula 3 d
 
 <div align="center">
 
-![quantization_formula](./image/quantization_formula_1.png)
+![quantization_formula](./Week_2/image/quantization_formula_1.png)
 
 (Formula 4)
 
@@ -194,7 +194,7 @@ For receivers, they will do exactlly opposite way of what we just did. Let's jus
 
 <div align="center">
 
-![quantization_formula](./image/quantization_formula_2.png)
+![quantization_formula](./Week_2/image/quantization_formula_2.png)
 
 (Formula 5)
 </div>
