@@ -6,7 +6,8 @@ In week 2, we are going to learn image compression by JPEG, which is probably th
 
 <div align="center"> 
 
-![JPEG_procedure](./Image/JPEG.jpg)
+![JPEG_procedure](./image/JPEG.jpg)
+
 (Picture 0) 
 </div>
 
@@ -42,6 +43,7 @@ How about DCT? Does it do better than FT? Let's see the formula for DCT.
 <div align="center">
 
 We assume that we have a NxN image, and its grey value on the position (x,y) is f(x,y)
+
 ![DCT_formula](./image/dct_formula.png)
 
 (Formula 1)
@@ -90,7 +92,7 @@ This is a sort of prefix-free code which will simplify the process of reconstruc
 
 <div align="center"> 
 
-![Huffman_intro](./Image/Huffman_coding_0.png)
+![Huffman_intro](./image/Huffman_coding_0.png)
 
 (Picture 3) </div>
 
@@ -109,7 +111,7 @@ Let's take a glance at Picture 3. You can see the power of Huffman Coding just b
 
 <div align="center">
 
-![Huffman_practise](./Image/Huffman_coding_1.png)
+![Huffman_practise](./image/Huffman_coding_1.png)
 
 (Picture 4) 
 </div>
@@ -118,7 +120,7 @@ Let's take a glance at Picture 3. You can see the power of Huffman Coding just b
 
 <div align="center">
 
-![Huffman_practise](./Image/Huffman_coding_2.JPG)
+![Huffman_practise](./image/Huffman_coding_2.JPG)
 
 (Picture 5) 
 </div>
@@ -140,7 +142,7 @@ While if the first digit that decoders receives zero, then they should wait for 
 <br>
 
 ## Quantization
-So far, we already know after doing DCT we will get an matrix or an image whose grey value normally decreases from upper-left to lower-right. Then, we can do the quantization which allows us to compress a lot. Also, in this step, we try to make a non-uniform distribution so that we will have a better result from doing the Huffman Coding. Let's take 8x8 block as an exmaple, and have a look at the image below.
+So far, we already know after doing DCT we will get an matrix whose grey value normally decreases from upper-left to lower-right. Then, we can do the quantization which allows us to compress a lot. Also, in this step, we try to make a non-uniform distribution so that we will have a better result from doing the Huffman Coding. Let's take 8x8 block as an exmaple, and have a look at the image below.
 
 <div align="center">
 
@@ -150,25 +152,24 @@ So far, we already know after doing DCT we will get an matrix or an image whose 
 </div>
 
 There are many ways we can do the quantization. For example, we can only take some coefficients and remove others like what picture a in Picture 3 does, or we can specify which coefficient we are going to take just like picture c in Picture 3. 
-In these methods, we can specify which exactly the pixels we want to send, but the disadvantage of this method is that we still need to send 8 bits to represent a pixel.
+In these methods, we can specify which pixels we want to send, but the disadvantage of this method is that we still need to send 8 bits to represent a pixel.
 
-Now, what JPEG says something very smart, for the picture b in Picture 3. For indexing, the first outcome from Formula 3, which is D0, we put it on the upper-left corner, and put the second outcome D1 right next to D0 in horizontal direction. Then we do a zigzag fashion until it reaches to the lower-right corner just like the number which is exactlly the index of outcome from Formula 3 in picture d. 
+Now, what JPEG says something very smart, for the picture b in Picture 3. We put D0 which is the first outcome from Formula 3 on the upper-left corner, and put the second outcome D1 right next to D0 in horizontal direction. Then we do a zigzag fashion until it reaches to the lower-right corner just like the number in picture d. 
 
-For the quantization, we are going to take some pixels and represent it with 8 bits and another with 7 bits and so on, until reaching the lower-right corner. It allows us to compress a lot but still can do a reasonable job just by quantizing the pixels that we are more interested in with 256 degrees and using only one or two numbers to represent the less important pixels.
-
-The benefit of using these methods are that we already know the grey value will decrease as the increase in index number. So when JPEG arrives to a certain coefficient, and sees that everybody else that comes after becomes 0, it just puts one signal that says end. We can know that every following pixel should be zero, then we are able to save a lot of bits.
+Next, a lot of them will become 0 after we doing a very strong quantization. The benefit of this is that we already know the grey value will decrease as the increase in the index number. So when JPEG receives to a certain coefficient, and sees that everybody else that comes after becomes 0, it just puts one signal that says end. We can know that every following pixel should be zero, then we are able to save a lot of bits.
 
 So that's the basic idea of quantization, before seeing how the JPEG does the quantization maybe here is a good place to take a break.
 
 <br>
 
-> During the break, you may can think a question that why we pay more interest in the upper-left instead of others during the quantization. For my personal understanding of this question is situated at the bottom of this artical, after thinking you may can have a look at it.
+> During the break, you may can think why we pay more interest in the upper-left instead of others during the quantization. My personal understanding of this question is situated at the bottom of this artical, and you may can have a look at it.
 
 <br>
 
 <div align="center">
 
 ![threshold_coding](./image/threshold_coding.png)
+
 (Picture 4)
 </div>
 
@@ -182,7 +183,7 @@ For doing the quantization, we are going to round every outcome from Formula 3 d
 
 </div>
 
-Once we have done the rounding part, the value between 0~15 will become 0, and the value between 16~31 will become 1 and so on. You may notice that the number at the upper-left corner is quite lower than the number located at the lower-right, which is also the same question you thought during the break time.
+Once we have done the rounding part, the value between 0-15 will become 0, and the value between 16-31 will become 1 and so on. You may notice that the number at the upper-left corner is quite lower than the number located at the lower-right, which is also the same question you thought during the break time.
 
 This part is crucial to Huffman Coding, because when doing Huffman Coding, we are expecting it has an non-uniform distribution so that we can compress a lot. By doing the quantization, we are basically increasing the posibility of some numbers from appearing or making it more concentrated.
 
@@ -198,9 +199,15 @@ For receivers, they will do exactlly opposite way of what we just did. Let's jus
 (Formula 5)
 </div>
 
-Once receivers get the signal, what receivers do is just multiplying it by the specific number cooresponding to the normalization matrix, and they will get the result that is approximately the same with the original one. 
+Once receivers get the signal, what receivers do is multiplying it by the specific number cooresponding to the normalization matrix, and they will get the result that is approximately the same with the original one. 
+
 
 <br>
 
-## Personal Understanding
+## Persional Understanding
 
+For the question in Quantization, you may notice that all the coefficients from Formula 3 are positive when i (or j) is 0. It means that we are collecting the basic signal such as contour of the object from the block(which is also called DC signal).
+
+The sign of the outcome from Formula 3 changes more frequently as the value of i or j gets higher, which means we are computing the difference between the grey value of each pixel in this block. If the grey value of each pixel are quite difference in a picture, then we can say that this picture contains a lot of edges or even noise. So, maybe that's the reason why people call edges or noise the high frequency signal.
+
+To answer why we pay more interest in the upper-left corner in quantization. In my opinion, the low frquency signal is more important than the high frequency one because it provides the basic information of the image so that people can understand what's the picture for.
